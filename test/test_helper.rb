@@ -25,7 +25,6 @@ class HelperTest < ActionView::TestCase
     @view.assets_manifest    = @manifest
     @view.assets_prefix      = "/assets"
     @view.assets_precompile  = %w( manifest.js )
-    @view.precompiled_assets = @view.build_precompiled_list(@manifest, @view.assets_precompile)
     @view.request = ActionDispatch::Request.new({
       "rack.url_scheme" => "https"
     })
@@ -730,7 +729,6 @@ end
 class AssetUrlHelperLinksTarget < HelperTest
   def test_precompile_allows_links
     @view.assets_precompile = ["url.css"]
-    @view.precompiled_assets = @view.build_precompiled_list(@manifest, @view.assets_precompile)
     assert @view.asset_path("url.css")
     assert @view.asset_path("logo.png")
 
